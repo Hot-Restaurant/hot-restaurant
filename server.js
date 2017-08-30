@@ -8,6 +8,7 @@ var path = require("path");
 // =============================================================
 var app = express();
 var PORT = 3000;
+var Customers = [];
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
@@ -41,15 +42,15 @@ app.get("/form", function(req, res) {
 // Create New Characters - takes in JSON input
 app.post("/api/new", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
-  var newcharacter = req.body;
+  var newCustomer = req.body;
 
-  console.log(newcharacter);
+  console.log(newCustomer);
 
   // We then add the json the user sent to the character array
-  characters.push(newcharacter);
+  Customers.push(newCustomer);
 
   // We then display the JSON to the users
-  res.json(newcharacter);
+  res.json(newCustomer);
 });
 
 // Starts the server to begin listening
