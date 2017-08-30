@@ -15,43 +15,67 @@
 
       <div class="jumbotron">
         <h1>Make a Reservation</h1>
-
+        <a class="btn btn-primary btn-lg" href="#" role="button">View Tables</a>
+        <button type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        </button>
       </div>
+
 
       <div class="lg-row-10">
 
         <!-- Name: first form field -->
 
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Name</span>
+          <span class="input-group-addon" id="name">Name</span>
           <input type="text" class="form-control" placeholder="John Doe" aria-describedby="basic-addon1">
         </div>
 
         <!-- phone number: second form field -->
 
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Phone Number</span>
+          <span class="input-group-addon" id="phone">Phone Number</span>
           <input type="text" class="form-control" placeholder="714-123-4567" aria-describedby="basic-addon1">
         </div>
 
         <!-- Email: third form field -->
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Email</span>
+          <span class="input-group-addon" id="email">Email</span>
           <input type="text" class="form-control" placeholder="john@doe.com" aria-describedby="basic-addon1">
         </div>
 
         <!-- ID/number of guests: fourth form field -->
         <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Number of Guests in Party</span>
+          <span class="input-group-addon" id="numGuest">Number of Guests in Party</span>
           <input type="text" class="form-control" placeholder="2" aria-describedby="basic-addon1">
         </div>
 
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Make Reservation</a>
-        <button type="button" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-        </button>
+        <p><a class="btn btn-primary btn-lg" id = "add-btn" href="#" role="button">Make Reservation</a>
+
 
       </div>
     </div>
+
+    <script type="text/javascript">
+  $("#add-btn").on("click", function(event) {
+    event.preventDefault();
+
+    var newCustomer = {
+      name: $("#name").val().trim(),
+      phone: $("#phone").val().trim(),
+      email: $("#email").val().trim(),
+      numGuest: $("#numGuest").val().trim()
+    };
+
+    // Question: What does this code do??
+    $.post("/api/new", newCustomer)
+    .done(function(data) {
+      console.log(data);
+      alert("Adding customer...");
+    });
+
+  });
+  </script>
+
   </body>
 </html>
