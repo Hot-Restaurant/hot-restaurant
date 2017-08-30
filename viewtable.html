@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hot Restaurant</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hot Restaurant</h1>
+      <h3></h3>
+      <hr>
+      <a href="/add"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-plus"></span> Make a reservation</button></a>
+    </div>
+    <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Reservations</strong></h3>
+          </div>
+          <div class="panel-body">
+            <input type="text" id="reserve-search" class="form-control">
+            <br>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary btn-md" id="search-btn"><span class="glyphicon glyphicon-search"></span>Search</button>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Reservation List</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="well">
+              <h2 id="box_disp"></h2>
+              <div id="stats">
+                <h3><strong>Name:</strong> <span id="name"></span></h3>
+                <h3><strong>Phone Number:</strong> <span id="number"></span></h3>
+                <h3><strong>Number of People:</strong> <span id="people"></span></h3>
+                <h3><strong>Email:</strong> <span id="email"></span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $("#search-btn").on("click", function() {
+      var searchedReserve = $("#reserve-search").val().trim();
+
+      searchedReserve= searchedReserve.replace(/\s+/g, "").toLowerCase();
+
+      $.get("/api/" + searchedReserve, function(data) {
+        console.log(data);
+        if (data) {
+          $("#stats").show();
+          $("#box_disp").text(data.box_disp);
+          $("#name").text(data.name);
+          $("#number").text(data.number);
+          $("#people").text(data.people);
+          $("#email").text(data.email);
+        }
+        else {
+          $("#box_disp").text("Your reservation was not found.");
+          $("#stats").hide();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
