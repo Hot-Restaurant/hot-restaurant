@@ -31,12 +31,23 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get("/index", function(req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
 // Get all characters
 app.get("/form", function(req, res) {
   // res.send("Welcome to the Star Wars Page!")
   res.sendFile(path.join(__dirname, "form.html"));
 });
 
+
+//send view table html
+app.get("/viewtable", function(req, res) {
+  // res.send("Welcome to the Star Wars Page!")
+  res.sendFile(path.join(__dirname, "viewtable.html"));
+});
 
 
 // Create New Characters - takes in JSON input
